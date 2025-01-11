@@ -70,7 +70,7 @@ class MovieDetails {
         language: json['Language'] ?? '',
         country: json['Country'] ?? '',
         awards: json['Awards'] ?? '',
-        posterUrl: json['Poster'] ?? '',
+        posterUrl: json['Poster'] != 'N/A' ? json['Poster'] : '',
         ratings: (json['Ratings'] as List?)
             ?.map((r) => Rating.fromJson(r as Map<String, dynamic>))
             .toList() ?? [],

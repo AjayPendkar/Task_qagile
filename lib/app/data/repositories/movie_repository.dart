@@ -14,7 +14,6 @@ class MovieRepository {
     int page = 1,
   }) async {
     try {
-      print('🔍 Searching movies: $query');
       final response = await apiClient.searchMovies(
         query: query,
         year: year,
@@ -22,43 +21,28 @@ class MovieRepository {
         page: page,
       );
 
-      if (response.status.hasError) {
-        print('❌ Search Error: ${response.statusText}');
-        return [];
-      }
-
-      final data = response.body;
-      if (data['Response'] == 'True') {
-        final movies = (data['Search'] as List)
+      if (response['Response'] == 'True') {
+        final movies = (response['Search'] as List)
             .map((movie) => Movie.fromJson(movie))
             .toList();
-        print('✅ Found ${movies.length} movies');
         return movies;
       }
-      print('⚠️ No movies found');
       return [];
     } catch (e) {
-      print('❌ Search Exception: $e');
-      return [];
+      throw Exception('Failed to search movies: $e');
     }
   }
 
   Future<MovieDetails> getMovieDetails(String movieId) async {
     try {
-      print('🔍 Getting movie details: $movieId');
       final response = await apiClient.getMovieDetails(movieId);
-      
-      if (response.status.hasError) {
-        print('❌ Details Error: ${response.statusText}');
-        throw Exception('Failed to load movie details');
-      }
 
-      final details = MovieDetails.fromJson(response.body);
-      print('✅ Got details for: ${details.title}');
-      return details;
+      if (response['Response'] == 'True') {
+        return MovieDetails.fromJson(response);
+      }
+      throw Exception(response['Error'] ?? 'Failed to get movie details');
     } catch (e) {
-      print('❌ Details Exception: $e');
-      throw Exception('Failed to load movie details');
+      throw Exception('Failed to get movie details: $e');
     }
   }
 } 

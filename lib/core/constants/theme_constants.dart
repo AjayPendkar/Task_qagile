@@ -157,4 +157,41 @@ class ThemeConstants {
       dateTimePickerTextStyle: lightBodyStyle,
     ),
   );
+  
+  static final CupertinoThemeData darkTheme = CupertinoThemeData(
+    brightness: Brightness.dark,
+    primaryColor: primaryNavyBlue,
+    scaffoldBackgroundColor: primaryBlack,
+    barBackgroundColor: darkSurface.withOpacity(surfaceOpacity),
+    textTheme: CupertinoTextThemeData(
+      primaryColor: primaryNavyBlue,
+      textStyle: darkBodyStyle,
+      actionTextStyle: darkSubtitleStyle,
+      navTitleTextStyle: darkTitleStyle,
+      navLargeTitleTextStyle: darkTitleStyle.copyWith(
+        fontSize: fontSizeLarge * 1.4,
+        fontWeight: FontWeight.bold,
+      ),
+      navActionTextStyle: darkSubtitleStyle,
+      tabLabelTextStyle: darkBodyStyle,
+      dateTimePickerTextStyle: darkBodyStyle,
+    ),
+  );
+  
+  static const TextStyle lightHeadlineStyle = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: lightText,
+  );
+  
+  // static const TextStyle lightSubtitleStyle = TextStyle(
+  //   fontSize: 18,
+  //   fontWeight: FontWeight.w600,
+  //   color: lightText,
+  // );
+  
+  // static const TextStyle lightBodyStyle = TextStyle(
+  //   fontSize: 16,
+  //   color: lightText,
+  // );
 } 
